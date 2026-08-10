@@ -1,0 +1,6 @@
+{
+  "name": "SalonSarthi",
+  "description": "#1 Customer Retention, Prepaid Wallet & WhatsApp Booking SaaS for Indian Salons",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
