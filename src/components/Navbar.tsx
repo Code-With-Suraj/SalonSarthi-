@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Phone, ArrowRight, PlayCircle, ShieldCheck } from 'lucide-react';
+import { Sparkles, Phone, ArrowRight, PlayCircle, ShieldCheck, Gift } from 'lucide-react';
 
 interface NavbarProps {
   onOpenLiveDemo: (mode?: 'owner' | 'customer') => void;
@@ -58,6 +58,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenLiveDemo, onOpenFreeTrial 
 
           {/* Nav Links */}
           <div className="hidden md:flex items-center gap-7 text-sm font-medium text-zinc-300">
+            <a href="#packages" className="hover:text-amber-300 transition-colors flex items-center gap-1 font-bold text-amber-300">
+              <Gift className="w-3.5 h-3.5 text-amber-400" />
+              Smart Packages
+            </a>
             <a href="#features" className="hover:text-amber-300 transition-colors">
               Features
             </a>

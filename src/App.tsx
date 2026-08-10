@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { MetricsBanner } from './components/MetricsBanner';
 import { ProblemSolution } from './components/ProblemSolution';
+import { SmartPackagesSection } from './components/SmartPackagesSection';
 import { FeaturePillars } from './components/FeaturePillars';
 import { SetupSteps } from './components/SetupSteps';
 import { PricingSection } from './components/PricingSection';
@@ -48,6 +49,12 @@ export default function App() {
 
         {/* Problem vs SalonSarthi Solution */}
         <ProblemSolution onOpenLiveDemo={handleOpenLiveDemo} />
+
+        {/* Smart Packages & High-Value Offers Showcase */}
+        <SmartPackagesSection
+          onOpenLiveDemo={handleOpenLiveDemo}
+          onOpenFreeTrial={handleOpenFreeTrial}
+        />
 
         {/* Core Feature Pillars with Interactive Tools */}
         <FeaturePillars onOpenLiveDemo={handleOpenLiveDemo} />
