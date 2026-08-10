@@ -3,7 +3,7 @@ import { ArrowRight, Phone, Sparkles, Zap, ShieldCheck } from 'lucide-react';
 
 interface CallToActionProps {
   onOpenFreeTrial: () => void;
-  onOpenLiveDemo: (mode?: 'owner' | 'customer') => void;
+  onOpenLiveDemo: (mode?: 'real' | 'owner' | 'customer') => void;
 }
 
 export const CallToAction: React.FC<CallToActionProps> = ({ onOpenFreeTrial, onOpenLiveDemo }) => {

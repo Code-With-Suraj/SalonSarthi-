@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Sparkles, Phone, ArrowRight, PlayCircle, ShieldCheck, Gift } from 'lucide-react';
 
 interface NavbarProps {
-  onOpenLiveDemo: (mode?: 'owner' | 'customer') => void;
+  onOpenLiveDemo: (mode?: 'real' | 'owner' | 'customer') => void;
   onOpenFreeTrial: () => void;
 }
 

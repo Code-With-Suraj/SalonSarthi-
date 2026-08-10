@@ -2,7 +2,7 @@ import React from 'react';
 import { XCircle, CheckCircle, ArrowRight, ShieldAlert, Sparkles, RefreshCw, Wallet, Gift, CalendarCheck, RotateCcw, CreditCard } from 'lucide-react';
 
 interface ProblemSolutionProps {
-  onOpenLiveDemo: (mode?: 'owner' | 'customer') => void;
+  onOpenLiveDemo: (mode?: 'real' | 'owner' | 'customer') => void;
 }
 
 export const ProblemSolution: React.FC<ProblemSolutionProps> = ({ onOpenLiveDemo }) => {

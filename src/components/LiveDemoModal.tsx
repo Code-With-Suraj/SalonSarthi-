@@ -19,6 +19,11 @@ import {
   CreditCard,
   Send,
   RefreshCw,
+  ExternalLink,
+  Copy,
+  Check,
+  Globe,
+  Key
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import {
@@ -34,16 +39,36 @@ import { ServiceItem, UpsellAddon, StaffMember, LedgerEntry, CustomerWallet } fr
 interface LiveDemoModalProps {
   isOpen: boolean;
   onClose: () => void;
-  initialMode?: 'owner' | 'customer';
+  initialMode?: 'real' | 'owner' | 'customer';
 }
 
-export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose, initialMode = 'owner' }) => {
-  const [activePortal, setActivePortal] = useState<'owner' | 'customer'>(initialMode);
+export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose, initialMode = 'real' }) => {
+  const [activePortal, setActivePortal] = useState<'real' | 'owner' | 'customer'>(initialMode);
+
+  // Real App Credentials
+  const REAL_APP_URL = 'https://salonsarthidemo.surajdx.com';
+  const REAL_OWNER_ID = '8851666208';
+  const REAL_OWNER_PASS = '8520';
+
+  const [copiedId, setCopiedId] = useState(false);
+  const [copiedPass, setCopiedPass] = useState(false);
+
+  const handleCopyId = () => {
+    navigator.clipboard.writeText(REAL_OWNER_ID);
+    setCopiedId(true);
+    setTimeout(() => setCopiedId(false), 2000);
+  };
+
+  const handleCopyPass = () => {
+    navigator.clipboard.writeText(REAL_OWNER_PASS);
+    setCopiedPass(true);
+    setTimeout(() => setCopiedPass(false), 2000);
+  };
 
   // Authentication State
   const [isOwnerLoggedIn, setIsOwnerLoggedIn] = useState(true);
-  const [ownerPhone, setOwnerPhone] = useState('9876543210');
-  const [ownerPass, setOwnerPass] = useState('owner123');
+  const [ownerPhone, setOwnerPhone] = useState('8851666208');
+  const [ownerPass, setOwnerPass] = useState('8520');
 
   const [isCustomerLoggedIn, setIsCustomerLoggedIn] = useState(true);
   const [customerPhone, setCustomerPhone] = useState('9811223344');
@@ -161,14 +186,26 @@ export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose, i
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
-      <div className="w-full max-w-6xl bg-[#08080C] border border-amber-500/40 rounded-3xl shadow-2xl overflow-hidden flex flex-col my-auto max-h-[92vh]">
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+      <div className="w-full max-w-6xl bg-[#08080C] border border-amber-500/40 rounded-3xl shadow-2xl overflow-hidden flex flex-col my-auto max-h-[94vh]">
         
         {/* Modal Header */}
-        <div className="p-4 sm:p-5 bg-[#0D0E15] border-b border-amber-500/30 flex items-center justify-between gap-4 shrink-0">
+        <div className="p-3 sm:p-5 bg-[#0D0E15] border-b border-amber-500/30 flex flex-wrap items-center justify-between gap-3 shrink-0">
           
           {/* Portal Switcher Tabs */}
-          <div className="flex items-center gap-2 p-1 rounded-xl bg-black/60 border border-white/10">
+          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-black/60 border border-white/10 overflow-x-auto">
+            <button
+              onClick={() => setActivePortal('real')}
+              className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-xs font-extrabold transition-all ${
+                activePortal === 'real'
+                  ? 'bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-slate-950 shadow-md scale-[1.02]'
+                  : 'text-amber-300 hover:text-white'
+              }`}
+            >
+              <Globe className="w-4 h-4 text-amber-500" />
+              🌐 Real Live Web App (Direct)
+            </button>
+
             <button
               onClick={() => setActivePortal('owner')}
               className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-xs font-extrabold transition-all ${
@@ -178,7 +215,7 @@ export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose, i
               }`}
             >
               <Store className="w-4 h-4" />
-              💈 Owner Portal Demo
+              💈 Owner Portal Simulator
             </button>
 
             <button
@@ -190,7 +227,7 @@ export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose, i
               }`}
             >
               <Smartphone className="w-4 h-4" />
-              👤 Customer App Demo
+              👤 Customer App Simulator
             </button>
           </div>
 
@@ -204,9 +241,110 @@ export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose, i
         </div>
 
         {/* Modal Body Area */}
-        <div className="p-4 sm:p-6 overflow-y-auto flex-1">
+        <div className="p-3 sm:p-6 overflow-y-auto flex-1">
           
-          {/* OWNER PORTAL */}
+          {/* REAL LIVE APP INTERFACE & EMBED */}
+          {activePortal === 'real' && (
+            <div className="space-y-4">
+              
+              {/* Login Credentials Banner */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-500/20 via-yellow-500/10 to-amber-500/20 border border-amber-500/40 shadow-xl">
+                <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+                  
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+                      <span className="text-xs font-mono font-bold text-amber-300 uppercase tracking-widest">
+                        Official Live App Credentials
+                      </span>
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-black text-white">
+                      Live SalonSarthi Owner Demo Access
+                    </h3>
+                    <p className="text-xs text-zinc-300 mt-1">
+                      Use these credentials below to log into the real web application (<strong className="text-amber-300 font-mono">salonsarthidemo.surajdx.com</strong>).
+                    </p>
+                  </div>
+
+                  {/* Credentials Cards with 1-Click Copy */}
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full lg:w-auto">
+                    
+                    {/* Owner Phone ID Card */}
+                    <div className="flex-1 sm:flex-none p-2.5 px-3.5 rounded-xl bg-black/60 border border-amber-500/40 flex items-center justify-between gap-3">
+                      <div>
+                        <span className="text-[10px] text-zinc-400 uppercase font-mono block">Owner ID / Mobile</span>
+                        <span className="text-sm font-black font-mono text-amber-300">{REAL_OWNER_ID}</span>
+                      </div>
+                      <button
+                        onClick={handleCopyId}
+                        className="p-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-xs font-bold flex items-center gap-1 transition-all"
+                      >
+                        {copiedId ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                        {copiedId ? 'Copied' : 'Copy'}
+                      </button>
+                    </div>
+
+                    {/* Password Card */}
+                    <div className="flex-1 sm:flex-none p-2.5 px-3.5 rounded-xl bg-black/60 border border-amber-500/40 flex items-center justify-between gap-3">
+                      <div>
+                        <span className="text-[10px] text-zinc-400 uppercase font-mono block">Password</span>
+                        <span className="text-sm font-black font-mono text-amber-300">{REAL_OWNER_PASS}</span>
+                      </div>
+                      <button
+                        onClick={handleCopyPass}
+                        className="p-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-xs font-bold flex items-center gap-1 transition-all"
+                      >
+                        {copiedPass ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                        {copiedPass ? 'Copied' : 'Copy'}
+                      </button>
+                    </div>
+
+                    {/* Open in New Tab Button */}
+                    <a
+                      href={REAL_APP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto py-3 px-5 rounded-xl font-extrabold text-xs text-slate-950 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 hover:brightness-110 shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 transition-all"
+                    >
+                      <span>Open Real App in New Tab</span>
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+
+                  </div>
+
+                </div>
+              </div>
+
+              {/* Embedded Real App Iframe */}
+              <div className="rounded-2xl border border-amber-500/30 bg-black/60 overflow-hidden shadow-2xl relative h-[600px] sm:h-[680px]">
+                <div className="p-2.5 bg-[#0D0E15] border-b border-white/10 flex items-center justify-between text-xs text-zinc-400 px-4">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+                    <span className="font-mono text-zinc-300 font-bold">{REAL_APP_URL}</span>
+                  </div>
+                  <a
+                    href={REAL_APP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-amber-300 hover:underline flex items-center gap-1 font-bold text-[11px]"
+                  >
+                    <span>Full Screen</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+
+                <iframe
+                  src={REAL_APP_URL}
+                  title="SalonSarthi Real App Demo"
+                  className="w-full h-[calc(100%-37px)] border-0 bg-white"
+                  allow="geolocation; microphone; camera"
+                />
+              </div>
+
+            </div>
+          )}
+
+          {/* OWNER PORTAL SIMULATOR */}
           {activePortal === 'owner' && (
             <div>
               {/* Owner Header & Quick Metrics */}
@@ -215,11 +353,11 @@ export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose, i
                   <div className="flex items-center gap-2">
                     <h3 className="text-xl font-black text-white">Glamour Studio Owner Dashboard</h3>
                     <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                      LIVE DEMO
+                      LIVE SIMULATION
                     </span>
                   </div>
                   <p className="text-xs text-zinc-400">
-                    Logged in as: <span className="text-white font-mono font-bold">9876543210</span> (Owner)
+                    Logged in as: <span className="text-white font-mono font-bold">8851666208</span> (Owner)
                   </p>
                 </div>
 
@@ -394,7 +532,7 @@ export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose, i
                           <p className="text-xs text-zinc-300 whitespace-pre-wrap">{t.message}</p>
                         </div>
                         <a
-                          href={`https://wa.me/919811223344?text=${encodeURIComponent(t.message)}`}
+                          href={`https://wa.me/918851666208?text=${encodeURIComponent(t.message)}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="mt-4 py-2 px-3 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-bold text-xs flex items-center justify-center gap-1.5 transition-all"

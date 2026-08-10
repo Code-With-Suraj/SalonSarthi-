@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 
 interface SmartPackagesSectionProps {
-  onOpenLiveDemo?: (mode?: 'owner' | 'customer') => void;
+  onOpenLiveDemo?: (mode?: 'real' | 'owner' | 'customer') => void;
   onOpenFreeTrial?: () => void;
 }
 

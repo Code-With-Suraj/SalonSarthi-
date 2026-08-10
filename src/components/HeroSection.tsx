@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 
 interface HeroSectionProps {
-  onOpenLiveDemo: (mode?: 'owner' | 'customer') => void;
+  onOpenLiveDemo: (mode?: 'real' | 'owner' | 'customer') => void;
   onOpenFreeTrial: () => void;
 }
 
@@ -138,20 +138,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenLiveDemo, onOpen
                   </div>
                 </div>
 
-                {/* Owner Credentials */}
+                {/* Owner Credentials for Real App */}
                 <div
-                  onClick={() => onOpenLiveDemo('owner')}
-                  className="p-2.5 rounded-xl bg-black/40 border border-white/10 hover:border-amber-400/50 cursor-pointer transition-all group"
+                  onClick={() => onOpenLiveDemo('real')}
+                  className="p-2.5 rounded-xl bg-black/40 border border-amber-500/40 hover:border-amber-400 cursor-pointer transition-all group"
                 >
                   <div className="flex items-center justify-between font-semibold text-zinc-200 mb-1">
                     <span className="flex items-center gap-1.5 text-amber-300 group-hover:underline">
                       <Store className="w-3.5 h-3.5" />
-                      💈 Owner Admin Portal
+                      💈 Owner Real Web App Access
                     </span>
-                    <span className="text-[10px] text-amber-400/80">Launch Portal →</span>
+                    <span className="text-[10px] text-emerald-400 font-bold">salonsarthidemo.surajdx.com →</span>
                   </div>
-                  <div className="font-mono text-zinc-400 text-[11px]">
-                    Mobile: <span className="text-white font-bold">9876543210</span> | Pass: <span className="text-white font-bold">owner123</span>
+                  <div className="font-mono text-zinc-300 text-[11px]">
+                    ID: <span className="text-amber-300 font-bold">8851666208</span> | Password: <span className="text-amber-300 font-bold">8520</span>
                   </div>
                 </div>
               </div>

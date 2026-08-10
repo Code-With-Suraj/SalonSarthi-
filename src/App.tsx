@@ -15,10 +15,10 @@ import { FreeTrialModal } from './components/FreeTrialModal';
 
 export default function App() {
   const [liveDemoOpen, setLiveDemoOpen] = useState(false);
-  const [liveDemoMode, setLiveDemoMode] = useState<'owner' | 'customer'>('owner');
+  const [liveDemoMode, setLiveDemoMode] = useState<'real' | 'owner' | 'customer'>('real');
   const [freeTrialOpen, setFreeTrialOpen] = useState(false);
 
-  const handleOpenLiveDemo = (mode: 'owner' | 'customer' = 'owner') => {
+  const handleOpenLiveDemo = (mode: 'real' | 'owner' | 'customer' = 'real') => {
     setLiveDemoMode(mode);
     setLiveDemoOpen(true);
   };

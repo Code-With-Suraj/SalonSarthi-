@@ -22,7 +22,7 @@ import { InteractiveBonusCalculator } from './InteractiveBonusCalculator';
 import { WHATSAPP_TEMPLATES, INITIAL_SERVICES, UPSELL_ADDONS, INITIAL_LEDGER } from '../data/mockData';
 
 interface FeaturePillarsProps {
-  onOpenLiveDemo: (mode?: 'owner' | 'customer') => void;
+  onOpenLiveDemo: (mode?: 'real' | 'owner' | 'customer') => void;
 }
 
 export const FeaturePillars: React.FC<FeaturePillarsProps> = ({ onOpenLiveDemo }) => {
